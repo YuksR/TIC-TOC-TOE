@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [yuks]
+    runs-on: [self-runner]
     steps:
       - uses: actions/checkout@v2
         with:
