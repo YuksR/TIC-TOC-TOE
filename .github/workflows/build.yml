@@ -33,4 +33,24 @@ jobs:
       - name: Docker Image Scan
         run: trivy image yuksr/tik-tok-toe:latest > trivyfs.txt
         
+  deploy:
+   name: Deploy to EKS   
+   runs-on: [self-hosted]
+   steps:
+      - name: docker pull image
+        run: docker pull sevenajay/tic-tac-toe:latest
+
+      - name: Image scan
+        run: trivy image sevenajay/tic-tac-toe:latest > trivyimagedeploy.txt  
+  
+      - name: Deploy to container
+        run: docker run -d --name game -p 3000:3000 sevenajay/tic-tac-toe:latest
+
+      - name: Update kubeconfig
+        run: aws eks --region ap-south-1 update-kubeconfig --name EKS_CLOUD
+
+      - name: Deploy to kubernetes
+        run: kubectl apply -f deployment-service.yml
+        
+        
            
