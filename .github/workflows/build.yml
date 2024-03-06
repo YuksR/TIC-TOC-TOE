@@ -30,4 +30,7 @@ jobs:
            docker push yuksr/tik-tok-toe:latest
         env:
            DOCKER_CLI_ACI: 1
+      - name: Docker Image Scan
+        run: trivy image yuksr/tik-tok-toe:latest > trivyfs.txt
+        
            
