@@ -27,7 +27,7 @@ jobs:
            docker build -t tik-tok-toe .
            docker tag tik-tok-toe yuksr/tik-tok-toe:latest
            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-           docker push yuks/tik-tok-toe:latest
+           docker push yuksr/tik-tok-toe:latest
         env:
            DOCKER_CLI_ACI: 1
            
