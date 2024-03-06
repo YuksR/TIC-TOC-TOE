@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: tic-tac-toe
-        image: yuksr/tic-tok-toe:latest
+        image: yuksr/tik-tok-toe:latest
         ports:
         - containerPort: 3000  
 
