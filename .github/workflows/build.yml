@@ -1,4 +1,4 @@
-name: Build
+name: Scan,Analyze
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -18,19 +18,3 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      - name: npm install dependency
-        run: npm install
-      - name: Trivy file scan
-        run: trivy fs . > trivyfs.txt
-      - name: docker build and push
-        run: |
-          docker build -t game .
-          docker tag game yuksr/game:latest
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-          docker push yuksr/game:latest
-        env: 
-          DOCKER_CLI_ACI: 1
-      - name: Trivy image scan
-        run: trivy image yuksr/game:latest > trivyimage.txt
-      
-
